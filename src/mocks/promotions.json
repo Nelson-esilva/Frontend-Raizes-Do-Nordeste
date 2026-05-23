@@ -1,0 +1,14 @@
+[
+  {
+    "id": "promo1",
+    "code": "NORDESTE10",
+    "label": "10% no primeiro pedido",
+    "discountPercent": 10
+  },
+  {
+    "id": "promo2",
+    "code": "JUNINA",
+    "label": "Festa junina, 15% em doces",
+    "discountPercent": 15
+  }
+]

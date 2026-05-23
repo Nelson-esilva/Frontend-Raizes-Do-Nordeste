@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Carne de sol">
+  <rect width="400" height="300" fill="#fff7ed"/>
+  <ellipse cx="200" cy="155" rx="150" ry="95" fill="#fde68a" stroke="#d97706" stroke-width="4"/>
+  <path d="M120 150 Q200 110 280 150 Q200 190 120 150" fill="#b45309"/>
+  <rect x="160" y="130" width="80" height="40" rx="6" fill="#fcd34d"/>
+  <text x="200" y="268" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="#5a2b1c">Carne de sol</text>
+</svg>

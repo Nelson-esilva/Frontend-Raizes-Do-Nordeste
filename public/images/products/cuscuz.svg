@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Cuscuz">
+  <rect width="400" height="300" fill="#fffbeb"/>
+  <rect x="130" y="70" width="140" height="150" rx="12" fill="#fbbf24" stroke="#b45309" stroke-width="4"/>
+  <rect x="145" y="85" width="110" height="30" rx="6" fill="#fef08a"/>
+  <rect x="145" y="125" width="110" height="30" rx="6" fill="#f87171"/>
+  <rect x="145" y="165" width="110" height="30" rx="6" fill="#fff"/>
+  <text x="200" y="268" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#5a2b1c">Cuscuz</text>
+</svg>

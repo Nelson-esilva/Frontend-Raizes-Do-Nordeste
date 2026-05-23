@@ -1,0 +1,82 @@
+[
+  {
+    "id": "p1",
+    "unitId": "recife-centro",
+    "category": "Tapiocas",
+    "name": "Tapioca de Frango com Catupiry",
+    "description": "Massa de tapioca crocante, frango desfiado e catupiry cremoso.",
+    "price": 18.9,
+    "image": "/images/photos/tapioca.jpg",
+    "available": true,
+    "options": [
+      { "id": "o1", "label": "Frango com catupiry" },
+      { "id": "o2", "label": "Carne de sol", "priceExtra": 2 },
+      { "id": "o3", "label": "Queijo coalho" }
+    ]
+  },
+  {
+    "id": "p2",
+    "unitId": "recife-centro",
+    "category": "Tapiocas",
+    "name": "Tapioca de Carne de Sol",
+    "description": "Carne de sol na manteiga da terra com queijo coalho.",
+    "price": 22.5,
+    "image": "/images/photos/meat.jpg",
+    "available": true,
+    "options": [
+      { "id": "o1", "label": "Carne de sol na manteiga" },
+      { "id": "o2", "label": "Queijo coalho extra", "priceExtra": 1.5 }
+    ]
+  },
+  {
+    "id": "p3",
+    "unitId": "recife-centro",
+    "category": "Cuscuz",
+    "name": "Cuscuz Recheado Completo",
+    "description": "Cuscuz de milho com ovo, queijo e calabresa acebolada.",
+    "price": 16.0,
+    "image": "/images/photos/cuscuz.jpg",
+    "available": true
+  },
+  {
+    "id": "p4",
+    "unitId": "recife-centro",
+    "category": "Sucos",
+    "name": "Suco de Acerola",
+    "description": "500 ml, natural, sem açúcar adicionado.",
+    "price": 9.5,
+    "image": "/images/photos/juice.jpg",
+    "available": true
+  },
+  {
+    "id": "p5",
+    "unitId": "recife-centro",
+    "category": "Doces",
+    "name": "Bolo de Macaxeira",
+    "description": "Fatia generosa com coco ralado, receita da Dona Francisca.",
+    "price": 12.0,
+    "image": "/images/photos/cake.jpg",
+    "available": false,
+    "seasonal": true
+  },
+  {
+    "id": "p6",
+    "unitId": "recife-boa-viagem",
+    "category": "Café da manhã",
+    "name": "Café da Manhã Nordestino",
+    "description": "Cuscuz, tapioca, café passado, manteiga de garrafa e suco do dia.",
+    "price": 28.0,
+    "image": "/images/photos/coffee.jpg",
+    "available": true
+  },
+  {
+    "id": "p7",
+    "unitId": "recife-boa-viagem",
+    "category": "Tapiocas",
+    "name": "Tapioca de Queijo Coalho",
+    "description": "Clássica, servida quentinha na hora.",
+    "price": 14.0,
+    "image": "/images/photos/cheese.jpg",
+    "available": true
+  }
+]

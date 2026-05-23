@@ -1,0 +1,26 @@
+[
+  {
+    "id": "recife-centro",
+    "name": "Recife, Centro",
+    "city": "Recife",
+    "address": "Rua da Aurora, 245, Boa Vista",
+    "open": true,
+    "hours": "Seg–Dom, 06h–22h"
+  },
+  {
+    "id": "recife-boa-viagem",
+    "name": "Recife, Boa Viagem",
+    "city": "Recife",
+    "address": "Av. Boa Viagem, 1200",
+    "open": true,
+    "hours": "Seg–Dom, 07h–23h"
+  },
+  {
+    "id": "fortaleza-aldeota",
+    "name": "Fortaleza, Aldeota",
+    "city": "Fortaleza",
+    "address": "Av. Dom Luís, 890",
+    "open": false,
+    "hours": "Seg–Sáb, 07h–21h"
+  }
+]

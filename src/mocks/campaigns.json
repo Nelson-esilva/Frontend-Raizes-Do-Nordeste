@@ -1,0 +1,28 @@
+[
+  {
+    "id": "c1",
+    "title": "Bem-vindo à rede",
+    "description": "10% no primeiro pedido com o cupom NORDESTE10.",
+    "code": "NORDESTE10",
+    "segment": "novo"
+  },
+  {
+    "id": "c2",
+    "title": "Cliente frequente",
+    "description": "Quem tem 100+ pontos ganha frete simbólico na retirada.",
+    "segment": "frequente"
+  },
+  {
+    "id": "c3",
+    "title": "Mês do seu aniversário",
+    "description": "15% em doces regionais com JUNINA.",
+    "code": "JUNINA",
+    "segment": "aniversariante"
+  },
+  {
+    "id": "c4",
+    "title": "Festa junina",
+    "description": "Cardápio sazonal disponível nas unidades participantes.",
+    "segment": "todos"
+  }
+]

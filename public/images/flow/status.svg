@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Acompanhar pedido">
+  <rect width="400" height="300" fill="#5a2b1c"/>
+  <rect x="60" y="70" width="280" height="140" rx="16" fill="#fff7ed"/>
+  <circle cx="120" cy="140" r="28" fill="#15803d"/>
+  <path d="M108 140 L116 148 L132 128" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="170" y="115" width="140" height="14" rx="4" fill="#d6d3d1"/>
+  <rect x="170" y="140" width="110" height="14" rx="4" fill="#d6d3d1"/>
+  <rect x="170" y="165" width="90" height="14" rx="4" fill="#fed7aa"/>
+  <text x="200" y="248" text-anchor="middle" font-family="Georgia,serif" font-size="22" font-weight="bold" fill="#fff">Seu pedido</text>
+</svg>

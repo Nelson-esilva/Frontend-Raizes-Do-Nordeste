@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Tapioca">
+  <rect width="400" height="300" fill="#fff7ed"/>
+  <ellipse cx="200" cy="155" rx="150" ry="95" fill="#fde68a" stroke="#d97706" stroke-width="4"/>
+  <ellipse cx="200" cy="150" rx="120" ry="70" fill="#fef3c7"/>
+  <ellipse cx="200" cy="140" rx="90" ry="45" fill="#f97316" opacity="0.85"/>
+  <text x="200" y="268" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#5a2b1c">Tapioca</text>
+</svg>

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "u1",
+    "name": "Maria Silva",
+    "email": "cliente@email.com",
+    "phone": "81999990000",
+    "birthDate": "1990-05-15",
+    "points": 120,
+    "marketingConsent": true,
+    "notifyOrderStatus": true,
+    "notifyPromotions": true,
+    "password": "Senha@123"
+  }
+]

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Lanchonete">
+  <rect width="400" height="300" fill="#ecfccb"/>
+  <rect x="80" y="120" width="240" height="130" fill="#c2410c"/>
+  <polygon points="60,120 200,40 340,120" fill="#9a3412"/>
+  <rect x="120" y="160" width="60" height="90" fill="#fff7ed"/>
+  <rect x="220" y="160" width="60" height="50" fill="#fef08a"/>
+  <rect x="100" y="200" width="200" height="20" fill="#fff" opacity="0.9"/>
+  <text x="200" y="280" text-anchor="middle" font-family="Georgia,serif" font-size="18" fill="#365314">Unidade</text>
+</svg>

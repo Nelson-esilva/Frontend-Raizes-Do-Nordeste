@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Cardapio">
+  <rect width="400" height="300" fill="#c2410c"/>
+  <circle cx="200" cy="120" r="70" fill="#fff7ed"/>
+  <ellipse cx="200" cy="115" rx="55" ry="32" fill="#f97316"/>
+  <ellipse cx="200" cy="108" rx="38" ry="20" fill="#ea580c"/>
+  <rect x="80" y="200" width="240" height="56" rx="12" fill="#5a2b1c" opacity="0.35"/>
+  <text x="200" y="238" text-anchor="middle" font-family="Georgia,serif" font-size="26" font-weight="bold" fill="#fff">Cardápio</text>
+</svg>
