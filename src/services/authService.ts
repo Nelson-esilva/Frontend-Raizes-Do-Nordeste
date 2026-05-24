@@ -89,3 +89,32 @@ export async function register(data: RegisterInput): Promise<LoginResult> {
 export function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
+
+export async function deleteAccount(
+  userId: string,
+  password: string,
+): Promise<{ ok: boolean; message: string }> {
+  await delay(400);
+  const idx = users.findIndex((u) => u.id === userId);
+  if (idx < 0) {
+    return { ok: false, message: "Conta não encontrada." };
+  }
+  if (users[idx].password !== password) {
+    return { ok: false, message: "Senha incorreta." };
+  }
+  users.splice(idx, 1);
+  return {
+    ok: true,
+    message: "Conta excluída e dados anonimizados (simulação).",
+  };
+}
+
+export async function verifyManagerAccess(
+  email: string,
+  password: string,
+): Promise<boolean> {
+  await delay(300);
+  return (
+    email.toLowerCase() === "gerente@raizes.com" && password === "Gerente@123"
+  );
+}

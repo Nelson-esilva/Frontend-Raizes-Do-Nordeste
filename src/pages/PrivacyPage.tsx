@@ -13,7 +13,7 @@ export function PrivacyPage() {
       <div className="app-shell-column flex-1 px-6 py-10 md:px-8 md:py-16">
         <article className="mx-auto max-w-3xl">
       <Link
-        to="/"
+        to="/inicio"
         className="text-sm font-semibold text-brand hover:underline"
       >
         ← Voltar ao início

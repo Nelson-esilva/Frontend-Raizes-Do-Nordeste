@@ -30,18 +30,6 @@ body {
   background-color: var(--color-surface);
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background-color: var(--color-surface);
-  background-image: url("/images/cordel-bg.svg");
-  background-size: 380px 380px;
-  background-repeat: repeat;
-}
-
 #root {
   min-height: 100dvh;
 }
@@ -87,4 +75,29 @@ body::before {
 }
 .no-scrollbar {
   scrollbar-width: none;
+}
+
+.channel-totem {
+  --totem-scale: 1.12;
+}
+
+.channel-totem .font-display {
+  font-size: calc(1em * var(--totem-scale));
+}
+
+.channel-totem button,
+.channel-totem .rounded-full.bg-brand,
+.channel-totem [type="submit"] {
+  min-height: 3rem;
+  font-size: 1.05rem;
+}
+
+.channel-totem .grid.grid-cols-2.gap-4 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .channel-totem .grid.grid-cols-2.gap-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

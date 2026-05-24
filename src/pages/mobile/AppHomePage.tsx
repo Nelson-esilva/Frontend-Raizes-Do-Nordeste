@@ -3,9 +3,10 @@ import { AppImage } from "@/components/ui/AppImage";
 import { Button } from "@/components/ui/Button";
 import { IMAGES } from "@/constants/images";
 import { useAuth } from "@/context/AuthContext";
+import { useChannel } from "@/context/ChannelContext";
 import { useUnit } from "@/context/UnitContext";
 
-const fluxo = [
+const fluxoApp = [
   {
     id: "unidade",
     label: "Escolher unidade",
@@ -44,9 +45,9 @@ const fluxo = [
     needsAuth: true,
     image: IMAGES.flow.status,
   },
-];
+] as const;
 
-type FluxoStep = (typeof fluxo)[number];
+type FluxoAppStep = (typeof fluxoApp)[number];
 
 const destaques = [
   { name: "Tapioca de Frango", image: IMAGES.products.tapioca },
@@ -55,10 +56,16 @@ const destaques = [
   { name: "Suco de Acerola", image: IMAGES.products.juice },
 ];
 
-export function AppHomePage() {
+const fluxoTotem = [
+  { label: "Escolher unidade", to: "/unidades" },
+  { label: "Ver cardápio", to: "/cardapio", needsUnit: true },
+  { label: "Montar pedido", to: "/carrinho" },
+  { label: "Pagar pedido", to: "/checkout" },
+] as const;
+
+function AppChannelHome() {
   const { user } = useAuth();
   const { unit } = useUnit();
-
   const pedidoCta = unit ? "/cardapio" : "/unidades";
 
   return (
@@ -188,7 +195,7 @@ export function AppHomePage() {
         </div>
 
         <nav aria-label="Fluxo do pedido" className="grid gap-3 sm:grid-cols-2">
-          {fluxo.map((step: FluxoStep, index) => {
+          {fluxoApp.map((step: FluxoAppStep, index) => {
             const needsUnit = "needsUnit" in step && step.needsUnit;
             const needsAuth = "needsAuth" in step && step.needsAuth;
             const blocked = (needsUnit && !unit) || (needsAuth && !user);
@@ -223,11 +230,11 @@ export function AppHomePage() {
                     <p className="mt-0.5 line-clamp-2 text-xs text-muted">
                       {step.desc}
                     </p>
-                    {blocked && (
+                    {blocked ? (
                       <p className="mt-1 text-[11px] font-medium text-accent">
                         {needsUnit ? "Selecione uma unidade" : "Faça login"}
                       </p>
-                    )}
+                    ) : null}
                   </div>
                   <span className="shrink-0 text-muted transition group-hover:translate-x-0.5 group-hover:text-brand">
                     →
@@ -241,44 +248,44 @@ export function AppHomePage() {
 
       {user && (
         <div className="grid gap-3 sm:grid-cols-2">
-              <Link
-                to="/fidelidade"
-                className="relative overflow-hidden rounded-2xl border border-line shadow-sm transition hover:shadow-md"
-              >
-                <AppImage
-                  src={IMAGES.promo}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div className="relative bg-gradient-to-br from-accent/90 to-brand p-5 text-white">
-                  <p className="font-display text-lg font-bold">Fidelidade</p>
-                  <p className="mt-1 text-sm text-white/90">
-                    {user.points} pontos disponíveis
-                  </p>
-                  <span className="mt-3 inline-block text-sm font-semibold">
-                    Resgatar →
-                  </span>
-                </div>
-              </Link>
-              <Link
-                to="/promocoes"
-                className="relative overflow-hidden rounded-2xl border border-line shadow-sm transition hover:shadow-md"
-              >
-                <AppImage
-                  src={IMAGES.promo}
-                  alt=""
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div className="relative bg-gradient-to-r from-ink/88 to-ink/55 p-5 text-white">
-                  <p className="font-display text-lg font-bold">Promoções</p>
-                  <p className="mt-1 text-sm text-white/85">
-                    Cupons e campanhas para você
-                  </p>
-                  <span className="mt-3 inline-block text-sm font-semibold text-brand-soft">
-                    Ver ofertas →
-                  </span>
-                </div>
-              </Link>
+          <Link
+            to="/fidelidade"
+            className="relative overflow-hidden rounded-2xl border border-line shadow-sm transition hover:shadow-md"
+          >
+            <AppImage
+              src={IMAGES.promo}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="relative bg-gradient-to-br from-accent/90 to-brand p-5 text-white">
+              <p className="font-display text-lg font-bold">Fidelidade</p>
+              <p className="mt-1 text-sm text-white/90">
+                {user.points} pontos disponíveis
+              </p>
+              <span className="mt-3 inline-block text-sm font-semibold">
+                Resgatar →
+              </span>
+            </div>
+          </Link>
+          <Link
+            to="/promocoes"
+            className="relative overflow-hidden rounded-2xl border border-line shadow-sm transition hover:shadow-md"
+          >
+            <AppImage
+              src={IMAGES.promo}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="relative bg-gradient-to-r from-ink/88 to-ink/55 p-5 text-white">
+              <p className="font-display text-lg font-bold">Promoções</p>
+              <p className="mt-1 text-sm text-white/85">
+                Cupons e campanhas para você
+              </p>
+              <span className="mt-3 inline-block text-sm font-semibold text-brand-soft">
+                Ver ofertas →
+              </span>
+            </div>
+          </Link>
         </div>
       )}
 
@@ -286,7 +293,10 @@ export function AppHomePage() {
         <div className="rounded-2xl border border-line bg-paper p-4 text-center text-sm">
           <p className="text-muted">
             Já tem unidade em mente? Você pode{" "}
-            <Link to="/unidades" className="font-semibold text-brand hover:underline">
+            <Link
+              to="/unidades"
+              className="font-semibold text-brand hover:underline"
+            >
               escolher a loja
             </Link>
             , mas precisará entrar ou cadastrar-se para concluir o pedido.
@@ -305,4 +315,76 @@ export function AppHomePage() {
       </p>
     </section>
   );
+}
+
+function TotemChannelHome() {
+  const { user } = useAuth();
+  const { unit } = useUnit();
+
+  return (
+    <section className="mx-auto max-w-2xl space-y-6">
+      <header>
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">
+          Totem · autoatendimento
+        </p>
+        <h1 className="font-display text-2xl font-bold text-ink md:text-3xl">
+          Raízes do Nordeste
+        </h1>
+        <p className="mt-2 text-sm text-muted">
+          Monte seu pedido na loja. Login opcional para acumular pontos no
+          balcão.
+        </p>
+      </header>
+
+      {unit && (
+        <p className="rounded-xl border border-brand/25 bg-brand-soft px-4 py-3 text-sm">
+          <span className="font-semibold text-brand">Unidade:</span> {unit.name}{" "}
+          · {unit.city}
+        </p>
+      )}
+
+      {!user && (
+        <p className="text-sm text-muted">
+          <Link to="/login" className="font-semibold text-brand hover:underline">
+            Entrar
+          </Link>{" "}
+          (opcional) · ou siga direto para escolher a unidade.
+        </p>
+      )}
+
+      <nav aria-label="Fluxo do totem" className="space-y-2">
+        <p className="text-sm font-semibold text-ink">Toque para começar</p>
+        <ol className="space-y-2">
+          {fluxoTotem.map((step) => {
+            const needsUnit = "needsUnit" in step && step.needsUnit;
+            const blocked = needsUnit && !unit;
+            const to = blocked ? "/unidades" : step.to;
+
+            return (
+              <li key={step.label}>
+                <Link
+                  to={to}
+                  className="flex items-center justify-between rounded-xl border border-line bg-paper px-4 py-4 text-base font-semibold shadow-sm transition hover:border-brand/40"
+                >
+                  {step.label}
+                  <span className="text-muted">→</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      </nav>
+
+      <p className="text-center text-xs text-muted">
+        <Link to="/privacidade" className="underline hover:text-brand">
+          Política de Privacidade
+        </Link>
+      </p>
+    </section>
+  );
+}
+
+export function AppHomePage() {
+  const { isTotem } = useChannel();
+  return isTotem ? <TotemChannelHome /> : <AppChannelHome />;
 }

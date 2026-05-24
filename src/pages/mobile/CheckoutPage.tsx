@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
+import { useChannel } from "@/context/ChannelContext";
 import { useUnit } from "@/context/UnitContext";
 import { createOrder, updateOrderPayment } from "@/services/orderService";
 import {
@@ -14,14 +15,20 @@ import {
 } from "@/services/paymentService";
 
 const methods: { id: PaymentMethod; label: string; desc: string }[] = [
-  { id: "pix", label: "PIX", desc: "Aprovação instantânea" },
+  { id: "pix", label: "PIX", desc: "Aprovação instantânea (parceiro externo)" },
   { id: "debito", label: "Débito", desc: "Direto na conta" },
   { id: "credito", label: "Crédito", desc: "Em até 3x sem juros" },
+  {
+    id: "retirada",
+    label: "Pagar na retirada",
+    desc: "Pagamento no balcão ao retirar o pedido",
+  },
 ];
 
 export function CheckoutPage() {
   const navigate = useNavigate();
   const { user, updateUser } = useAuth();
+  const { isTotem } = useChannel();
   const { unit } = useUnit();
   const cart = useCart();
   const [method, setMethod] = useState<PaymentMethod>("pix");
@@ -29,8 +36,12 @@ export function CheckoutPage() {
   const [message, setMessage] = useState("");
   const [orderId, setOrderId] = useState<string | null>(null);
 
-  if (!unit) return null;
-  if (!user) {
+  if (!unit) {
+    navigate("/unidades");
+    return null;
+  }
+
+  if (!user && !isTotem) {
     navigate("/login");
     return null;
   }
@@ -48,11 +59,17 @@ export function CheckoutPage() {
     setOrderId(order.id);
     setPhase("processing");
 
-    const status = await processPayment(outcome);
+    const status =
+      method === "retirada" && outcome === "aprovado"
+        ? ("aprovado" as const)
+        : await processPayment(outcome);
+
     updateOrderPayment(
       order.id,
       status,
-      status === "aprovado" ? Math.floor(cart.total) : undefined,
+      status === "aprovado" && user
+        ? Math.floor(cart.total)
+        : undefined,
     );
 
     if (status === "aprovado") {
@@ -77,7 +94,13 @@ export function CheckoutPage() {
   if (phase === "processing") {
     return (
       <div className="grid place-items-center py-20">
-        <Spinner label="Processando pagamento no parceiro certificado..." />
+        <Spinner
+          label={
+            method === "retirada"
+              ? "Registrando pedido para pagamento na retirada..."
+              : "Processando pagamento no parceiro certificado..."
+          }
+        />
       </div>
     );
   }
@@ -87,19 +110,20 @@ export function CheckoutPage() {
       <div className="space-y-6">
         <header>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand">
-            Etapa final
+            RF07 · Pagamento externo
           </p>
           <h1 className="font-display text-3xl font-bold text-ink md:text-4xl">
             Como você quer pagar?
           </h1>
           <p className="mt-1 text-sm text-muted">
-            Não armazenamos dados de cartão. A transação é tratada inteiramente
-            por parceiro certificado.
+            {isTotem
+              ? "Totem: login opcional. Informe CPF no balcão para pontos."
+              : "Não armazenamos dados de cartão. Transação via parceiro certificado."}
           </p>
         </header>
 
         {phase === "pick" && (
-          <fieldset className="grid gap-3 md:grid-cols-3">
+          <fieldset className="grid gap-3 sm:grid-cols-2">
             <legend className="sr-only">Forma de pagamento</legend>
             {methods.map((m) => {
               const active = method === m.id;
@@ -129,14 +153,13 @@ export function CheckoutPage() {
           </fieldset>
         )}
 
-        {phase === "pick" && (
+        {phase === "pick" && method !== "retirada" && (
           <div className="rounded-2xl border border-dashed border-line bg-brand-soft/30 p-5">
             <p className="text-sm font-semibold text-ink">
-              Pagamento simulado
+              Pagamento simulado (parceiro externo)
             </p>
             <p className="mt-1 text-sm text-muted">
-              Escolha o resultado para testar aprovação, recusa ou instabilidade.
-              Nenhuma cobrança real é feita.
+              Teste aprovação, recusa ou instabilidade. Nenhuma cobrança real.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Button onClick={() => pay("aprovado")}>Simular aprovado</Button>
@@ -148,6 +171,12 @@ export function CheckoutPage() {
               </Button>
             </div>
           </div>
+        )}
+
+        {phase === "pick" && method === "retirada" && (
+          <Button fullWidth size="lg" onClick={() => pay("aprovado")}>
+            Confirmar pedido — pagar na retirada
+          </Button>
         )}
 
         {phase === "done" && message && (

@@ -5,12 +5,14 @@ import { AppImage } from "@/components/ui/AppImage";
 import { Button } from "@/components/ui/Button";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
+import { useChannel } from "@/context/ChannelContext";
 import { useUnit } from "@/context/UnitContext";
 import { validateCode } from "@/services/promotionService";
 
 export function CartPage() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { isTotem } = useChannel();
   const { unit } = useUnit();
   const cart = useCart();
   const [codeInput, setCodeInput] = useState("");
@@ -31,7 +33,7 @@ export function CartPage() {
   }
 
   function goCheckout() {
-    if (!user) {
+    if (!user && !isTotem) {
       navigate("/login");
       return;
     }
@@ -194,7 +196,9 @@ export function CartPage() {
           pointsUsed={cart.redeemPoints}
         />
         <Button fullWidth size="lg" onClick={goCheckout}>
-          {!user ? "Entrar e confirmar pedido" : "Confirmar pedido"}
+          {!user && !isTotem
+            ? "Entrar e confirmar pedido"
+            : "Confirmar pedido"}
         </Button>
         <p className="text-center text-xs text-muted">
           Pagamento processado por parceiro certificado. Você poderá escolher

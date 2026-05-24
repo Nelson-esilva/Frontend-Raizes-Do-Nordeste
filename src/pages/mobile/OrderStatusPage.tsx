@@ -71,7 +71,10 @@ export function OrderStatusPage() {
         <p className="text-sm text-danger">Pagamento não confirmado.</p>
       )}
 
-      <Link to="/" className="block text-center text-sm font-semibold text-brand">
+      <Link
+        to="/inicio"
+        className="block text-center text-sm font-semibold text-brand"
+      >
         Voltar ao início
       </Link>
     </section>

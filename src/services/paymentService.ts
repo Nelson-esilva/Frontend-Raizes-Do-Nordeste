@@ -1,7 +1,7 @@
 import type { PaymentStatus } from "@/types";
 import { delay } from "./delay";
 
-export type PaymentMethod = "pix" | "debito" | "credito";
+export type PaymentMethod = "pix" | "debito" | "credito" | "retirada";
 
 export type PaymentOutcome = "aprovado" | "recusado" | "timeout";
 

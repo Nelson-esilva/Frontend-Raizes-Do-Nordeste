@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useAuth } from "@/context/AuthContext";
+import * as authService from "@/services/authService";
 import { listOrdersByUser } from "@/services/orderService";
 import type { Order } from "@/types";
 
@@ -18,6 +19,8 @@ export function ProfilePage() {
   const [deleteStep, setDeleteStep] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const [password, setPassword] = useState("");
+  const [deleteError, setDeleteError] = useState("");
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -52,8 +55,16 @@ export function ProfilePage() {
     setEditing(false);
   }
 
-  function handleDelete() {
-    if (confirmText !== "EXCLUIR" || !password) return;
+  async function handleDelete() {
+    if (!user || confirmText !== "EXCLUIR" || !password) return;
+    setDeleteError("");
+    setDeleting(true);
+    const result = await authService.deleteAccount(user.id, password);
+    setDeleting(false);
+    if (!result.ok) {
+      setDeleteError(result.message);
+      return;
+    }
     logout();
     navigate("/");
   }
@@ -178,12 +189,17 @@ export function ProfilePage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            {deleteError && (
+              <p className="text-sm text-danger" role="alert">
+                {deleteError}
+              </p>
+            )}
             <Button
               variant="danger"
-              disabled={confirmText !== "EXCLUIR" || !password}
+              disabled={confirmText !== "EXCLUIR" || !password || deleting}
               onClick={handleDelete}
             >
-              Confirmar
+              {deleting ? "Processando..." : "Confirmar exclusão"}
             </Button>
           </div>
         )}

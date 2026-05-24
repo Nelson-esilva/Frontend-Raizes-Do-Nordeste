@@ -1,8 +1,15 @@
 # Raízes do Nordeste — Front-end
 
-Interface responsiva (mobile-first) para pedidos e fidelização da Rede Raízes do Nordeste.
+Interface para pedidos e fidelização da Rede Raízes do Nordeste (projeto acadêmico Front-End).
 
-Uma única aplicação adapta-se a **app** e **web** por meio de breakpoints. Para documentar multicanalidade, use prints do DevTools (ex.: 375px, 768px, 1280px).
+## Canais
+
+Na abertura, escolha o canal:
+
+- **APP MOBILE / WEB** — login, fidelidade, promoções, fluxo completo
+- **TOTEM** — autoatendimento na loja, botões amplos, login opcional
+
+Use **Canal** no header para voltar à seleção.
 
 ## Rodar
 
@@ -15,23 +22,25 @@ Abra `http://localhost:5173`.
 
 ## Demo
 
-- E-mail: `cliente@email.com`
-- Senha: `Senha@123`
-- Cupom: `NORDESTE10`
+| Perfil | Credenciais |
+|--------|-------------|
+| Cliente | `cliente@email.com` / `Senha@123` |
+| Gerente (RF13) | `gerente@raizes.com` / `Gerente@123` |
+| Cupom | `NORDESTE10` |
 
 ## Fluxo principal
 
-1. **Cadastro** (`/cadastro`) ou **login** (`/login`)
-2. Escolher **unidade** → **cardápio** → **carrinho** → **checkout**
-3. Acompanhar pedido e pontos em **perfil** e **fidelidade**
+1. Escolher canal em `/`
+2. **Cadastro** ou **login** (opcional no totem)
+3. **Unidade** → **cardápio** → **carrinho** → **checkout**
+4. Status em `/pedido/:id` · pontos em **fidelidade** e **perfil**
 
-## Sugestão de prints (multicanalidade)
+## Prints (multicanalidade no trabalho)
 
-| Canal   | Largura no DevTools | Tela sugerida      |
-|---------|---------------------|--------------------|
-| App     | 375px (iPhone)      | Home, login, cardápio |
-| Tablet  | 768px               | Cardápio, carrinho |
-| Web     | 1280px              | Home, cardápio     |
+| Canal | Largura DevTools | Tela |
+|-------|------------------|------|
+| App / Web | 375px, 1280px | Início, cardápio, checkout |
+| Totem | 1024px paisagem | Seleção totem, unidades, cardápio |
 
 ## Scripts
 
@@ -41,18 +50,4 @@ Abra `http://localhost:5173`.
 
 ## Deploy
 
-GitHub (público) + Vercel: framework Vite, build `npm run build`, output `dist`.
-
-## Estrutura
-
-```
-src/
-  layouts/AppLayout.tsx   layout único responsivo
-  pages/mobile/           telas do fluxo
-  components/             UI reutilizável
-  context/                sessão, unidade, carrinho
-  mocks/                  dados simulados
-  services/               regras mock (auth, pedido, pagamento)
-```
-
-Rotas antigas `/app/*` e `/web/*` redirecionam automaticamente para a rota equivalente na raiz.
+Repositório Git público + Vercel (Vite, build `npm run build`, output `dist`).

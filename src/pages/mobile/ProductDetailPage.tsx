@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { AppImage } from "@/components/ui/AppImage";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Spinner } from "@/components/ui/Spinner";
-import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import * as menuService from "@/services/menuService";
 import type { Product, ProductOption } from "@/types";
 
 export function ProductDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { user } = useAuth();
   const { addItem } = useCart();
   const [product, setProduct] = useState<Product | null>(null);
   const [qty, setQty] = useState(1);
@@ -34,10 +31,6 @@ export function ProductDetailPage() {
   const needsOption = (item.options?.length ?? 0) > 0;
 
   function handleAdd() {
-    if (!user) {
-      navigate("/login");
-      return;
-    }
     if (needsOption && !option) return;
 
     const label = option
@@ -72,6 +65,7 @@ export function ProductDetailPage() {
 
       <div className="flex gap-2">
         {!item.available && <Badge tone="warn">Indisponível</Badge>}
+        {item.available && !item.seasonal && <Badge tone="ok">Disponível</Badge>}
         {item.seasonal && <Badge tone="seasonal">Sazonal</Badge>}
       </div>
 

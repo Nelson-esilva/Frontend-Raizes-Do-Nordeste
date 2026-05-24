@@ -46,8 +46,8 @@ export function UnitsPage() {
           Onde a tradição te espera
         </h1>
         <p className="max-w-2xl text-sm text-muted md:text-base">
-          O cardápio muda conforme a loja e a sazonalidade. A geolocalização é
-          opcional, você sempre pode escolher pela cidade.
+          O cardápio muda conforme a loja selecionada e a sazonalidade dos
+          produtos.
         </p>
       </header>
 
